@@ -33,12 +33,13 @@ class Person(models.Model):
     def __str__(self):
         return self.name
 
-class Osoba(models.Model):
-    imie = models.CharField(max_length, blank=False)
-    nazwisko = models.CharField(max_length, blank=False)
-    plec = models.IntegerField(choices=PLEC.choices, default=PLEC.choices[0][0])
-    stanowisko = models.ForeignKey(Stanowisko, null=True, blank=True, on_delete=models.SET_NULL)
-
 class Stanowisko(models.Model):
     nazwa=models.CharField(max_length=50)
     opis= models.TextField(null=True, blank=True)
+
+class Osoba(models.Model):
+    imie = models.CharField(max_length=60, blank=False)
+    nazwisko = models.CharField(max_length=60, blank=False)
+    plec = models.IntegerField(choices=PLEC.choices, default=PLEC.choices[0][0])
+    Stanowisko = models.ForeignKey(Stanowisko, null=True, blank=True, on_delete=models.SET_NULL)
+
