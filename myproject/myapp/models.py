@@ -42,4 +42,8 @@ class Osoba(models.Model):
     nazwisko = models.CharField(max_length=60, blank=False)
     plec = models.IntegerField(choices=PLEC.choices, default=PLEC.choices[0][0])
     Stanowisko = models.ForeignKey(Stanowisko, null=True, blank=True, on_delete=models.SET_NULL)
+    data_dodania = models.DateField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "Osoba"
 
