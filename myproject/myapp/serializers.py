@@ -21,7 +21,7 @@ class PersonSerializer(serializers.Serializer):
     # odzwierciedlenie pola w postaci klucza obcego
     # przy dodawaniu nowego obiektu możemy odwołać się do istniejącego poprzez inicjalizację nowego obiektu
     # np. team=Team({id}) lub wcześniejszym stworzeniu nowej instancji tej klasy
-    team = serializers.PrimaryKeyRelatedField(queryset=Team.objects.all())
+    team = serializers.PrimaryKeyRelatedField(queryset=Team.objects.all(), allow_null=TRUE)
 
     # przesłonięcie metody create() z klasy serializers.Serializer
     def create(self, validated_data):
