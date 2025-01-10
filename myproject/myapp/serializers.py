@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Person, Team, MONTHS, SHIRT_SIZES
+from .models import Person, Team, MONTHS, SHIRT_SIZES, Osoba
 
 
 class PersonSerializer(serializers.Serializer):
@@ -21,7 +21,7 @@ class PersonSerializer(serializers.Serializer):
     # odzwierciedlenie pola w postaci klucza obcego
     # przy dodawaniu nowego obiektu możemy odwołać się do istniejącego poprzez inicjalizację nowego obiektu
     # np. team=Team({id}) lub wcześniejszym stworzeniu nowej instancji tej klasy
-    team = serializers.PrimaryKeyRelatedField(queryset=Team.objects.all(), allow_null=TRUE)
+    team = serializers.PrimaryKeyRelatedField(queryset=Team.objects.all(), allow_null='True')
 
     # przesłonięcie metody create() z klasy serializers.Serializer
     def create(self, validated_data):
@@ -36,3 +36,10 @@ class PersonSerializer(serializers.Serializer):
         instance.team = validated_data.get('team', instance.team)
         instance.save()
         return instance
+
+class OsobaModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Osoba
+        fields = '__all__' #wszystkie pola (kolumny) z klasy Osoba
+        read_only_fields = ['id']
+
